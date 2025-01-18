@@ -156,7 +156,8 @@ class PostCreateView(LoginRequiredMixin, PostChangeMixin, CreateView):
         )
 
 
-class PostUpdateView(LoginRequiredMixin, PostChangeMixin, UpdateView):
+class PostUpdateView(LoginRequiredMixin, PostChangeMixin,
+                     UpdateView):
     def dispatch(self, request, *args, **kwargs):
         # Если пользователь не авторизован, перенаправить на страницу
         # публикации
