@@ -107,7 +107,8 @@ class ProfileListView(GetPostsMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        self.profile = get_object_or_404(User, username=self.kwargs['username'])
+        self.profile = get_object_or_404(
+            User, username=self.kwargs['username'])
 
         posts = Post.objects.select_related(
             'category', 'location', 'author'
@@ -157,7 +158,8 @@ class PostCreateView(LoginRequiredMixin, PostChangeMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, PostChangeMixin, UpdateView):
     def dispatch(self, request, *args, **kwargs):
-        # Если пользователь не авторизован, перенаправить на страницу публикации
+        # Если пользователь не авторизован, перенаправить на страницу
+        # публикации
         if not request.user.is_authenticated:
             return redirect('blog:post_detail', pk=kwargs['pk'])
         return super().dispatch(request, *args, **kwargs)
@@ -188,7 +190,9 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
     form_class = CommentForm
 
     def get_object(self):
-        return get_object_or_404(Post, pk=self.kwargs['pk'], is_published=True)
+        return get_object_or_404(
+            Post, pk=self.kwargs['pk'], is_published=True
+        )
 
     def get_context_data(self, **kwargs):
         content = super().get_context_data(**kwargs)
