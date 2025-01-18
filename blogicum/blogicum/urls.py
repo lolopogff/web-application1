@@ -3,11 +3,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import include, path, reverse_lazy
 from django.views.generic import CreateView
 
-
-from django.conf.urls.static import static
-from django.conf import settings
-
-
 handler403 = 'pages.views.csrf_failure'
 handler404 = 'pages.views.page_not_found'
 handler500 = 'pages.views.server_error'
@@ -27,7 +22,3 @@ urlpatterns = ([
         name='registration',
     ),
 ])
-
-# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))
-
-
