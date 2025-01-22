@@ -145,7 +145,8 @@ def edit_post(request, pk):
         return redirect('blog:post_detail', pk)
     if request.method == "POST":
         form = PostForm(
-            request.POST, files=request.FILES or None, instance=post)
+            request.POST, files=request.FILES or None,
+            instance=post)
         if form.is_valid():
             post.save()
             return redirect('blog:post_detail', pk)
